@@ -1,10 +1,7 @@
 import reflex as rx
 import uuid
-from typing import List, TYPE_CHECKING
+from typing import List as PyList, TYPE_CHECKING
 from sqlmodel import Field, Relationship
-
-if TYPE_CHECKING:
-    from app.models import MotorbikeDB, PartDB
 
 
 def generate_uuid_str() -> str:
@@ -37,7 +34,7 @@ class MotorbikeDB(rx.Model, table=True):
     )
     name: str
     initial_cost: float
-    parts: List["PartDB"] = Relationship(
+    parts: PyList["PartDB"] = Relationship(
         back_populates="motorbike",
         sa_relationship_kwargs={
             "cascade": "all, delete-orphan"
